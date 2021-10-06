@@ -1,47 +1,56 @@
 import React, { useState } from 'react';
+import useLocalStorageTask from '../../utils/useLocalStorageTask';
 import styles from './Homepage.module.css';
 import { TaskCards } from '../../components/TaskCards/TaskCards';
+import Header from '../../components/Header/Header';
 import Button from '@mui/material/Button';
+import Input from '@mui/material/Input';
 
 export default function Homepage(): JSX.Element {
-  const [klicked, setKlicked] = useState(false);
-  const [task, setTask] = useState([
-    {
-      id: 1,
-      task: 'lernen von React',
-    },
-    {
-      id: 2,
-      task: 'lernen von HTML',
-    },
-    {
-      id: 3,
-      task: 'lernen von CSS',
-    },
-    {
-      id: 4,
-      task: 'lernen von Angular',
-    },
-  ]);
+  const [disabled, setDisabled] = useState(true);
+  const [taskValue, setTaskValue] = useState('');
+  const { addTask, tasks, deleteTask } = useLocalStorageTask();
+
   return (
     <div className={styles.container}>
-      <header>
-        <h1>ToDoList</h1>
-      </header>
+      <Header title="2 DO" />
       <main>
         <section>
+          <Input
+            required={true}
+            color="primary"
+            value={taskValue}
+            onChange={(event) => {
+              event.preventDefault();
+              setTaskValue(event.target.value);
+              {
+                taskValue === '' ? setDisabled(true) : setDisabled(false);
+              }
+            }}
+          />
           <Button
+            disabled={disabled}
             variant="contained"
             onClick={() => {
-              console.log(klicked);
-              setKlicked(!klicked);
+              if (taskValue !== '') {
+                addTask(taskValue);
+              }
+
+              setTaskValue('');
             }}
           >
             Hinzufügen
           </Button>
         </section>
-        {!klicked &&
-          task.map((task) => <TaskCards id={task.id} task={task.task} />)}
+        {tasks.map((task, index) => (
+          <TaskCards
+            task={task}
+            id={index + 1}
+            onClick={() => {
+              deleteTask(task);
+            }}
+          />
+        ))}
       </main>
     </div>
   );
