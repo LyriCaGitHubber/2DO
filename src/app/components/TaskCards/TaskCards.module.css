@@ -1,0 +1,8 @@
+.taskCard {
+  display: flex;
+}
+
+.deleteButton {
+  all: unset;
+  color: red;
+}
