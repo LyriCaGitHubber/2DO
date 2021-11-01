@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useLocalStorageTask from '../../utils/useLocalStorageTask';
 import styles from './Homepage.module.css';
 import { TaskCards } from '../../components/TaskCards/TaskCards';
@@ -10,6 +10,12 @@ export default function Homepage(): JSX.Element {
   const [disabled, setDisabled] = useState(true);
   const [taskValue, setTaskValue] = useState('');
   const { addTask, tasks, deleteTask } = useLocalStorageTask();
+
+  useEffect(() => {
+    if (taskValue === '') {
+      setDisabled(true);
+    }
+  }, [taskValue, disabled]);
 
   return (
     <div className={styles.container}>
