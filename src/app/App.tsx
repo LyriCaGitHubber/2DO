@@ -6,7 +6,7 @@ export function App(): JSX.Element {
   return (
     <Router>
       <Switch>
-        <Route path="/tasklist">TaskList</Route>
+        <Route path="/lists">TaskList</Route>
         <Route path="/">
           <Homepage />
         </Route>
