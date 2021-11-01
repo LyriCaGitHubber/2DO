@@ -1,10 +1,9 @@
-import React from 'react';
 import useLocalStorage from './useLocalStorage';
 
 export default function useLocalStorageTask() {
   const [tasks, setTask] = useLocalStorage('Tasks', []);
 
-  function addTask(task: string) {
+  function addTask(task: string): void {
     setTask([...tasks, task]);
   }
 
