@@ -7,6 +7,7 @@
 :root {
   --clr-background: #355c7d;
   --clr-cta-main: #f67280;
+  --clr-text-link: #fff;
 }
 
 body {

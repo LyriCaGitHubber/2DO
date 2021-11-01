@@ -1,3 +1,14 @@
 .appTitle {
   color: var(--clr-cta-main);
 }
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--clr-text-link);
+}
+
+ul {
+  list-style-type: none;
+}
